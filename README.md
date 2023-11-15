@@ -5,26 +5,27 @@ A Logger for C++ <br>
 ## Step 1: install ncurses <br>
 On Arch-Based System <br>
 
-'''console
+```bash
 $ sudo pacman -S ncurses
-'''
+```
 
 On Fedora, RHEL, CentOS, AlmaLinux, Rocky Linux: <br>
 
-
+```bash
 $ sudo yum install ncurses-devel
-
+```
 
 Or, <br>
 
-
+```bash
 $ sudo dnf install ncurses-devel
-
+```
 
 On Debian, Ubuntu, Linux Mint, Pop OS: <br>
 
-
+```bash
 $ sudo apt install libncurses5-dev libncursesw5-dev
+```
 
 ## Step 2: Link with cmake
 
