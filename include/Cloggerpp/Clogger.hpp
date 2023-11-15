@@ -115,6 +115,8 @@ namespace Clog {
 
 
     // Methods
+        Clogger();
+        Clogger(const Clog::Clogger& clog);
         Clogger(std::shared_ptr<Clog::Handler::Base> handl);
 
         void update_handler(std::shared_ptr<Clog::Handler::Base> handl);

@@ -13,6 +13,13 @@
     Clog::Level Clog::lvl::CRITICAL = {5, "CRITICAL"};
 
 // -------------------------------- Clogger Impl -------------------------------- //
+    Clog::Clogger::Clogger() {}
+    Clog::Clogger::Clogger(const Clog::Clogger& clog) {
+        // copy over user defined variables
+        this->out_level = clog.out_level;
+        this->format = clog.format;
+        this->handler = clog.handler;
+    }
     Clog::Clogger::Clogger(std::shared_ptr<Clog::Handler::Base> handl) : handler(handl) {}  
 
     void Clog::Clogger::update_handler(std::shared_ptr<Clog::Handler::Base> handl) {
