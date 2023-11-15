@@ -129,6 +129,7 @@ namespace Clog {
         friend Clogger& operator<<(Clogger& os, Clog::Level level);
         friend Clogger& operator<<(Clogger& os, char* text);
         friend Clogger& operator<<(Clogger& os, const char* text);
+        friend Clogger& operator<<(Clogger& os, std::string text);
  
         // Default Cases
         template <typename T>

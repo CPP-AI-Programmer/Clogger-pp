@@ -45,6 +45,10 @@
         os.buffer.push_back(text);
         return os;
     }
+    Clog::Clogger& Clog::operator<<(Clog::Clogger& os, std::string text) {
+        os.buffer.push_back(text);
+        return os;
+    }
 
 // -------------------------------- Handlers Impls --------------------------------//
     // ---------------- STD OUTPUT Handler ---------------- // 
