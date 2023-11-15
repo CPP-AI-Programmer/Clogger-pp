@@ -17,8 +17,8 @@
 
 namespace Clog {
     // character escape sequences
-    char exit = '0';
-    char nl = '\n';
+    extern char exit;
+    extern char nl;
     
     // this is a namespace for efficiency and convienience if new levels want to be added
     // using a std::string for safety, might be updated in the future:
@@ -35,13 +35,13 @@ namespace Clog {
         std::string name;
     };
     namespace lvl {
-        Clog::Level UNKNOWN =  {-1, "UNKNOWN"};
-        Clog::Level DEBUG =    {0, "DEBUG"};
-        Clog::Level INFO =     {1, "INFO"};
-        Clog::Level NOTICE =   {2, "NOTICE"};
-        Clog::Level WARNING =  {3, "WARNING"};
-        Clog::Level ERROR =    {4, "ERROR"};
-        Clog::Level CRITICAL = {5, "CRITICAL"};
+        extern Clog::Level UNKNOWN;
+        extern Clog::Level DEBUG;
+        extern Clog::Level INFO;
+        extern Clog::Level NOTICE;
+        extern Clog::Level WARNING;
+        extern Clog::Level ERROR;
+        extern Clog::Level CRITICAL;
     };
     
     namespace Handler {

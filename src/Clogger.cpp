@@ -1,5 +1,17 @@
 #include "Cloggerpp/Clogger.hpp"
 
+// --- Variables Impl --- //
+    char Clog::exit = '0';
+    char Clog::nl = '\n';
+
+    Clog::Level Clog::lvl::UNKNOWN =  {-1, "UNKNOWN"};
+    Clog::Level Clog::lvl::DEBUG =    {0, "DEBUG"};
+    Clog::Level Clog::lvl::INFO =     {1, "INFO"};
+    Clog::Level Clog::lvl::NOTICE =   {2, "NOTICE"};
+    Clog::Level Clog::lvl::WARNING =  {3, "WARNING"};
+    Clog::Level Clog::lvl::ERROR =    {4, "ERROR"};
+    Clog::Level Clog::lvl::CRITICAL = {5, "CRITICAL"};
+
 // -------------------------------- Clogger Impl -------------------------------- //
     Clog::Clogger::Clogger(std::shared_ptr<Clog::Handler::Base> handl) : handler(handl) {}  
 
