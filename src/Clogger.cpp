@@ -106,7 +106,9 @@
                     this->file << text;
                 }
                 this->file << '\n';
+                this->file.flush();
             }
+
         }
 
     // ---------------- NCURSES Handler ---------------- // 
