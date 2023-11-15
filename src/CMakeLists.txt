@@ -1,8 +1,7 @@
 project(Clogger-pp)
 
-add_library(Cloggerpp
+add_library(Cloggerpp SHARED
     Clogger.cpp
-    Handler.cpp
 )
 add_library(Cloggerpp::Cloggerpp ALIAS Cloggerpp)
 

@@ -1,5 +1,5 @@
 cmake_minimum_required(VERSION 3.22.1) # my version 
-project(Cloggerpp_test VERSION 0.0.1)
+project(Cloggerpp_test VERSION 1.0.0)
 
 include(FetchContent)
 
@@ -9,6 +9,6 @@ FetchContent_Declare(
     GIT_TAG master) 
 FetchContent_MakeAvailable(Clogger_pp)
 
-add_executable(main main.cpp) 
+add_executable(main main.cpp)
 
 target_link_libraries(main PUBLIC Cloggerpp::Cloggerpp)
