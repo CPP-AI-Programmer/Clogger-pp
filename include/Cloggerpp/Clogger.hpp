@@ -9,7 +9,7 @@
 #include <memory>
 
 // linked
-// #include <ncurses.h>
+#include <ncurses.h>
 
 // TODO: 
 //  Implement User Formatting
@@ -78,21 +78,21 @@ namespace Clog {
             );
 
         };
-        /*
-        Comming soon...
-        A Terminal Viewer like nano using ncurses;
-        This as you can tell has endless possibilitys like allowing control over parts of your program through TUI,
-         Although this should probably be its own repo i included it in here as i think it counts as logging,
-         since this could be used for something as simple as help menus or
-         as complicated as dynamic logging after a critical error.
-        */
-
-        /*
-        class TUI : public Base {
-        public:
-        
-        };
-        */
+	    class Tui : public Base {
+	    private:
+            WINDOW* _win;
+	    public:
+	        Tui(); // initscr
+            Tui(WINDOW* win);
+            Tui(int x_size, int y_size, int x_pos, int y_pos);
+	        ~Tui(); // endwin
+	        virtual void print(
+	    	    const std::vector<std::string>& buffer,
+	    	    std::string& format,
+	    	    Clog::Level& clvl,
+	    	    Clog::Level& olvl
+	        );
+	    };
     };
 
 

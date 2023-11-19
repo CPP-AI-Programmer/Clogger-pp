@@ -2,6 +2,7 @@ project(Clogger-pp)
 
 add_library(Cloggerpp SHARED
     Clogger.cpp
+    TUI.cpp
 )
 add_library(Cloggerpp::Cloggerpp ALIAS Cloggerpp)
 
