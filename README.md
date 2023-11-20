@@ -49,6 +49,14 @@ target_link_libraries({EXE_NAME} PUBLIC Cloggerpp::Cloggerpp)
 ```
 
 #### or find_package
+Install with <br>
+```bash
+git clone https://github.com/CPP-AI-Programmer/Clogger-pp.git
+cd Clogger-pp && mkdir build && cd build
+cmake ..
+cmake --build . 
+sudo cmake --install .
+```
 Replace: <br>
   {EXE_NAME} with your executable name (e.g. main) <br>
   {SOURCE_FILES} with your source files (e.g. src/main.cpp) <br>
@@ -63,6 +71,7 @@ If you get an error similar to the program not being able to find libCloggerpp.s
 ```bash
 sudo ldconfig
 ```
+Be careful installing to much as oldver version .so files stay (you should always delete them if not needed to remove bloat) <br>
 
 
 ## Documentation - Comming Soon...

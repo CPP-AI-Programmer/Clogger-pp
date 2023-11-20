@@ -10,6 +10,8 @@
 
 // linked
 #include <ncurses.h>
+#define NC_OK OK
+#undef OK
 
 // TODO: 
 //  Implement User Formatting
