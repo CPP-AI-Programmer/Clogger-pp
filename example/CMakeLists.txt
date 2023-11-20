@@ -13,4 +13,4 @@ add_executable(main main.cpp)
 add_executable(tui tui.cpp)
 
 target_link_libraries(main PUBLIC Cloggerpp::Cloggerpp)
-target_link_libraries(tui PUBLIC Cloggerpp::Cloggerpp)
+target_link_libraries(tui PUBLIC Cloggerpp::Cloggerpp ncurses)
