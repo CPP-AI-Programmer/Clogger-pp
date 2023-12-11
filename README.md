@@ -76,3 +76,9 @@ Be careful installing to much as oldver version .so files stay (you should alway
 
 ## Documentation - Comming Soon...
 
+## KNOWN ISSUES
+##### legacy cloggerpp and current cloggerpp on same machine
+if you have done this and its resulted in errors like symbol not found or the build is saying something like ... not_found in clogger.hpp <br>
+then you will most likely have to clean you /usr/local/* of any Cloggerpp files like /usr/local/libCloggerpp*
+as well as -rf /usr/local/include/Cloggerpp.
+if this dosen't work then please crate an issue and i or someone else who is knowledgeable in this package will try and help you (you can also use stackoverflow if you want)
