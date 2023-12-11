@@ -1,4 +1,6 @@
 #include "Cloggerpp/Clogger.hpp" // <- called Cloggerpp because Clogger probably exsists and if it dosen't i will recreate this in pure C
+#include "Cloggerpp/file/file.hpp"
+#include "Cloggerpp/cout/stdout.hpp"
 
 // Pronounced: Clog - er - plus - plus
 // or: Clog - er - p - p

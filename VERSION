@@ -1,6 +1,8 @@
 
+1.0.12:
+	Comming Soon... will probably make the cmakelists options more specific
 1.0.11:
-	Comming Soon... will probably make the cmakelists options more compatible and updated examples
+	Fixed Examples
 1.0.10:
 	Fixing Legacy Installed bug when trying to install new package layout
 1.0.9:

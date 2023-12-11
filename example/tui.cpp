@@ -1,4 +1,6 @@
 #include <Cloggerpp/Clogger.hpp>
+#include <Cloggerpp/tui/ncurses.hpp>
+#include <ncurses.h>
 
 int main() {
     initscr();
@@ -7,8 +9,7 @@ int main() {
     box(win, 0, 0);
     wrefresh(win);
 
-    // if you want you can use the default initalize but this will limit options and this should be used purly as a log window in your application
-    std::shared_ptr<Clog::Handler::Base> handler = std::make_shared<Clog::Handler::Tui>(win);
+    std::shared_ptr<Clog::Handler::Base> handler = std::make_shared<Clog::Handler::NC_Tui>(win);
     auto logger = Clog::Clogger(handler);
 
     logger << Clog::lvl::INFO << "Hello, World!" << Clog::exit;
@@ -23,8 +24,8 @@ int main() {
     getstr(usrin);
     wclear(win);
     logger << "You Printed: " << usrin << Clog::exit;
+    
     getch();
 
     return 0;
 }
-
