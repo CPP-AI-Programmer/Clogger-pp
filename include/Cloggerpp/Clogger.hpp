@@ -1,21 +1,13 @@
 #pragma once
-
-#include <iostream>
-#include <fstream>
+// STD Includes
 #include <vector>
 #include <string>
-#include <utility>
-
+// #include <utility>
 #include <memory>
-
-// linked
-#include <ncurses.h>
-#define NC_OK OK
-#undef OK
 
 // TODO: 
 //  Implement User Formatting
-
+//  Implement USER naming
 
 namespace Clog {
     // character escape sequences
@@ -37,13 +29,13 @@ namespace Clog {
         std::string name;
     };
     namespace lvl {
-        extern Clog::Level UNKNOWN;
-        extern Clog::Level DEBUG;
-        extern Clog::Level INFO;
-        extern Clog::Level NOTICE;
-        extern Clog::Level WARNING;
-        extern Clog::Level ERROR;
-        extern Clog::Level CRITICAL;
+        extern Clog::Level UNKNOWN;     // Level -1
+        extern Clog::Level DEBUG;       // Level 0
+        extern Clog::Level INFO;        // Level 1
+        extern Clog::Level NOTICE;      // Level 2
+        extern Clog::Level WARNING;     // Level 3
+        extern Clog::Level ERROR;       // Level 4
+        extern Clog::Level CRITICAL;    // Level 5
     };
     
     namespace Handler {
@@ -56,48 +48,20 @@ namespace Clog {
                 Clog::Level& olvl
             ) = 0;
         };
-        class stdout : public Base {
-        public:
-            stdout();
-            virtual void print(
-                const std::vector<std::string>& buffer,
-                std::string& format,
-                Clog::Level& clvl,
-                Clog::Level& olvl
-            );
-        };
-        class File : public Base {
-        private:
-            std::fstream file;
-        public:
-            File(std::string& path); // open file
-            ~File(); // close file
-            virtual void print(
-                const std::vector<std::string>& buffer,
-                std::string& format,
-                Clog::Level& clvl,
-                Clog::Level& olvl
-            );
-
-        };
-	    class Tui : public Base {
-	    private:
-            WINDOW* _win;
-	    public:
-	        Tui(); // initscr
-            Tui(WINDOW* win);
-            Tui(int x_size, int y_size, int x_pos, int y_pos);
-	        ~Tui(); // endwin
-	        virtual void print(
-	    	    const std::vector<std::string>& buffer,
-	    	    std::string& format,
-	    	    Clog::Level& clvl,
-	    	    Clog::Level& olvl
-	        );
-	    };
     };
 
+    struct User {
+        std::string name = "ROOT";
+        // in case it will be used for something like a webserver (which will flood the .log file with loads of connections),
+        //  this way you can have multiple handlers for one clog object
+        bool custom_handl = false; // to stop any seg faults this will set weather to use Clogger handl or the users handl
+        std::shared_ptr<Clog::Handler::Base> handl = nullptr; 
+    };
+    namespace usr {
+        extern Clog::User ROOT;
+    };
 
+    // Consider Changing shared_ptr to unique_ptr
     class Clogger {
     public:
     // Variables
@@ -129,31 +93,31 @@ namespace Clog {
 
         // AUX Methods for << use
         // Special Cases 
-        friend Clogger& operator<<(Clogger& os, char text);
-        friend Clogger& operator<<(Clogger& os, Clog::Level level);
-        friend Clogger& operator<<(Clogger& os, char* text);
-        friend Clogger& operator<<(Clogger& os, const char* text);
-        friend Clogger& operator<<(Clogger& os, std::string text);
+        Clogger& operator<<(char text);
+        Clogger& operator<<(Clog::Level level);
+        Clogger& operator<<(Clog::User usr); // TODO: Implement This
+        Clogger& operator<<(char* text);
+        Clogger& operator<<(const char* text);
+        Clogger& operator<<(std::string text);
  
         // Default Cases
         template <typename T>
-        friend Clog::Clogger& operator<<(Clog::Clogger& os, T text) {
-            os.buffer.push_back(std::to_string(text));
-            return os;
+        Clog::Clogger& operator<<(T text) {
+            this->buffer.push_back(std::to_string(text));
+            return *this;
         }
-
         template <typename T>
-        friend Clog::Clogger& operator<<(Clog::Clogger& os, T* text) {
-            os.buffer.push_back(std::to_string(*text));
-            return os;
+        Clog::Clogger& operator<<(T* text) {
+            this << text;
+            return *this;
         }
         
         template <typename T>
-        friend Clog::Clogger& operator<<(Clog::Clogger& os, std::vector<T>& texts) {
+        Clog::Clogger& operator<<(std::vector<T>& texts) {
             for (auto& text : texts) {
-                os << text;
+                this << text;
             }
-            return os;
+            return *this;
         }
     };
     /*
