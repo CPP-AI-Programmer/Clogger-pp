@@ -111,7 +111,6 @@ namespace Clog {
             this << text;
             return *this;
         }
-        
         template <typename T>
         Clog::Clogger& operator<<(std::vector<T>& texts) {
             for (auto& text : texts) {
