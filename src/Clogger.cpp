@@ -45,11 +45,13 @@
     Clog::Clogger& Clog::Clogger::operator<<(char text) {
         // switch statment would 'probably'(untested) make this slower
         if (text = '0') {
-            if (this->usr.custom_handl) {
-                this->usr.handl->print(this->buffer, this->format, this->usr, this->level);
-            } else {
-                this->handler->print(this->buffer, this->format, this->usr, this->level);
-            } 
+            if (this->level.level >= this->out_level.level) {
+                if (this->usr.custom_handl) {
+                    this->usr.handl->print(this->buffer, this->format, this->usr, this->level);
+                } else {
+                    this->handler->print(this->buffer, this->format, this->usr, this->level);
+                } 
+            }
             this->level = Clog::lvl::INFO;
             this->buffer.clear();
         } else {
