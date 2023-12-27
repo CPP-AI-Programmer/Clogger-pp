@@ -24,23 +24,19 @@
         endwin();
     }
     void Clog::Handler::NC_Tui::print(
-        const std::vector<std::string>& buffer,
-        std::string& format,
-        Clog::Level& clvl,
-        Clog::Level& olvl
+        const std::string& buffer,
+        const std::string& format,
+        const Clog::User& usr_,
+        const Clog::Level& lvl
     ) {
-        if (clvl.level >= olvl.level) {
-            int x_pos = 1;
-            int y_pos = 1;
-            if (format != "") {
-                int x_pos = std::stoi(std::to_string(format[0]));
-                int y_pos = std::stoi(std::to_string(format[1]));
-            }
-            std::string final_text = clvl.name + ": ";
-    	    for (auto& text : buffer) {
-    	        final_text += text;
-    	    }
-    	    mvwprintw(this->_win, x_pos, y_pos, "%s", final_text.c_str());
-    	    wrefresh(this->_win);
-        }
+        
+        int x_pos = 1;
+        int y_pos = 1;
+        // if (format != "") {
+        //    int x_pos = std::stoi(std::to_string(format[0]));
+        //    int y_pos = std::stoi(std::to_string(format[1]));
+        // }
+        std::string final_text = usr_.name + '-' + clvl.name + ": " + buffer;
+    	mvwprintw(this->_win, x_pos, y_pos, "%s", final_text.c_str());
+    	wrefresh(this->_win);
     }

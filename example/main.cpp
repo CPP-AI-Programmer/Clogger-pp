@@ -8,9 +8,9 @@
 int main() {
     // ------------ Logger Init ------------ //
         // Create Handlers
-        auto stdout_handl = std::make_shared<Clog::Handler::stdout>(); // stdout
+        auto stdout_handl = new Clog::Handler::stdout(); // stdout
         std::string file_path = "app.log";
-        auto file_handl = std::make_shared<Clog::Handler::File>(file_path); // file
+        auto file_handl = new Clog::Handler::File(file_path); // file
 
         // Create Logger
         auto logger = Clog::Clogger(stdout_handl);
@@ -64,6 +64,10 @@ int main() {
         Output:
         DEBUG: Debug Message
         */
+
+    // these are not deleted by the class
+    delete stdout_handl;
+    delete file_handl;
 
     return 0;
 }

@@ -8,17 +8,15 @@
         this->file.close();
     }
     void Clog::Handler::File::print(
-        const std::vector<std::string>& buffer,
-        std::string& format,
-        Clog::Level& clvl,
-        Clog::Level& olvl
+        const std::string& buffer,
+        const std::string& format,
+        const Clog::User& usr_,
+        const Clog::Level& lvl
     ) {
-        if (clvl.level >= olvl.level) {
-            this->file << clvl.name << ": ";
-            for (auto& text : buffer) {
-                this->file << text;
-            }
-            this->file << '\n';
-            this->file.flush();
+        this->file << usr_.name << '-' << lvl.name << ": ";
+        for (auto& text : buffer) {
+            this->file << text;
         }
+        this->file << '\n';
+        this->file.flush();
     }

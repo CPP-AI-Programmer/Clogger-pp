@@ -3,28 +3,26 @@ project(Clogger-pp VERSION 1.0.0)
 
 include(GNUInstallDirs)
 
-# --- Options === #
+# --- Options --- #
   option(FILE "File Implementations (will be seperated in the future)" ON)
   option(COUT "Char Output Implementations (will be seperated in the future)" ON)
   # --- Terminal UI --- #
     option(TUI_NC "link with ncurses and tui.cpp" OFF)
 # --- END (Options) --- #
 
-set(SRC_FILES 
-  src/Clogger.cpp
-)
+set(SRC_FILES src/Clogger.cpp)
 
 # --- Optional Implementations --- #
   # std::cout, printf, maybe_more...
   if (COUT) 
     list(APPEND SRC_FILES src/cout/stdout.cpp)
   endif()
-  # fstream, FILE*
+  # fstream, FILE*, ... 
   if (FILE)
     list(APPEND SRC_FILES src/file/file.cpp)
   endif()
   # --- Terminal User Interfaces --- #
-    # ncurses
+    # ncurses, ...
     if (TUI_NC)
       list(APPEND SRC_FILES src/tui/ncurses.cpp)
     endif()

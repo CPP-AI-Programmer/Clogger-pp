@@ -1,6 +1,11 @@
+# This File is used as another place to store the git commit history
+# Future Updates:
+#  make this logger library more accessible by chaning into a pure C class that just needs a stack to run (for embedded systems and future projects)
+#  make the std library use case optional (create custom buffer class, move std::string and std::vector<T> operator<< functions to another file optionally added compiled using options)
+#  update the options to also control what .hpp/.h files are installed
 
-1.0.12: Comming Soon...
-	will probably make the cmakelists options more specific
+1.1.0: 
+	Removed alot of bloat and updated the buffer to a simple std::string for speed and efficiency
 1.0.12:
 	Updated Clogger.hpp
 1.0.11:

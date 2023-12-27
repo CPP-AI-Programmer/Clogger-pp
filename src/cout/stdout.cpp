@@ -3,16 +3,14 @@
 // ---------------- STD OUTPUT Handler ---------------- // 
     Clog::Handler::stdout::stdout() {}
     void Clog::Handler::stdout::print(
-        const std::vector<std::string>& buffer,
-        std::string& format,
-        Clog::Level& clvl,
-        Clog::Level& olvl
+        const std::string& buffer,
+        const std::string& format,
+        const Clog::User& usr_,
+        const Clog::Level& lvl
     ) {
-        if (clvl.level >= olvl.level) {
-            std::cout << clvl.name << ": ";
-            for (auto& text : buffer) {
-                std::cout << text;
-            }
-            std::cout << std::endl;
+        std::cout << usr_.name << '-' << lvl.name << ": ";
+        for (auto& text : buffer) {
+            std::cout << text;
         }
+        std::cout << std::endl;
     }

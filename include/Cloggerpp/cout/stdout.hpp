@@ -12,10 +12,10 @@ namespace Clog {
         public:
             stdout();
             virtual void print(
-                const std::vector<std::string>& buffer,
-                std::string& format,
-                Clog::Level& clvl,
-                Clog::Level& olvl
+                const std::string& buffer,
+                const std::string& format,
+                const Clog::User& usr_,
+                const Clog::Level& lvl
             );
         };
     };

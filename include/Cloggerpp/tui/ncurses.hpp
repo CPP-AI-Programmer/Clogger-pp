@@ -24,10 +24,10 @@ namespace Clog {
             NC_Tui(int x_size, int y_size, int x_pos, int y_pos); // initscr
 	        ~NC_Tui(); // endwin
 	        virtual void print(
-	    	    const std::vector<std::string>& buffer,
-	    	    std::string& format,
-	    	    Clog::Level& clvl,
-	    	    Clog::Level& olvl
+                const std::string& buffer,
+                const std::string& format,
+                const Clog::User& usr_,
+                const Clog::Level& lvl
 	        );
 	    };
     };

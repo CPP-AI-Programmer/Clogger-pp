@@ -9,8 +9,7 @@ int main() {
     box(win, 0, 0);
     wrefresh(win);
 
-    std::shared_ptr<Clog::Handler::Base> handler = std::make_shared<Clog::Handler::NC_Tui>(win);
-    auto logger = Clog::Clogger(handler);
+    auto logger = Clog::Clogger( new Clog::Handler::NC_Tui( win ) );
 
     logger << Clog::lvl::INFO << "Hello, World!" << Clog::exit;
     getch();

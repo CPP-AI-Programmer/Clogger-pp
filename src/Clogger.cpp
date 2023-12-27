@@ -17,27 +17,27 @@
 
 // -------------------------------- Clogger Impl -------------------------------- //
     Clog::Clogger::Clogger() {}
-    Clog::Clogger::Clogger(const Clog::Clogger& clog) {
+    Clog::Clogger::Clogger(Clog::Clogger&& clog) {
         // copy over user defined variables
-        this->out_level = clog.out_level;
-        this->format = clog.format;
-        this->handler = clog.handler;
+        this->out_level = std::move(clog.out_level);
+        this->format = std::move(clog.format);
+        this->handler = std::move(clog.handler);
     }
-    Clog::Clogger::Clogger(std::shared_ptr<Clog::Handler::Base> handl) : handler(handl) {}
+    Clog::Clogger::Clogger(Clog::Handler::Base* handl) : handler(std::move(handl)) {}
 
-    void Clog::Clogger::update_handler(std::shared_ptr<Clog::Handler::Base> handl) {
+    void Clog::Clogger::update_handler(Clog::Handler::Base* handl) {
         // this->handler.reset(); // reset value at handler
         // the line beneath decrease the reference to the handler by 1 apperantly and no need for the line aboe
         // testing REQUIRED
-        this->handler = handl; // assign new value at handler according to new user handler
+        this->handler = std::move(handl); // assign new value at handler according to new user handler
     }
 
     void Clog::Clogger::set_level(Clog::Level& x) {
-        this->out_level = x;
+        this->out_level = std::move(x);
     }
 
     void Clog::Clogger::set_format(std::string& _format) {
-        this->format = _format;
+        this->format = std::move(_format);
     }
 
     // AUX Methods for << use
@@ -45,34 +45,38 @@
     Clog::Clogger& Clog::Clogger::operator<<(char text) {
         // switch statment would 'probably'(untested) make this slower
         if (text = '0') {
-            this->handler->print(this->buffer, this->format, this->level, this->out_level);
+            if (this->usr.custom_handl) {
+                this->usr.handl->print(this->buffer, this->format, this->usr, this->level);
+            } else {
+                this->handler->print(this->buffer, this->format, this->usr, this->level);
+            } 
             this->level = Clog::lvl::INFO;
-            this->buffer = {};
+            this->buffer.clear();
         } else {
-            this->buffer.push_back(std::to_string(text));
+            this->buffer += text;
         }
         return *this;
     }
-    Clog::Clogger& Clog::Clogger::operator<<(Clog::User usr) {
-        /* Needs to update handler before this serves any purpose */
+    Clog::Clogger& Clog::Clogger::operator<<(const Clog::User& usr) {
+        this->usr = usr;
         return *this;
     }
 
-    Clog::Clogger& Clog::Clogger::operator<<(Clog::Level level) { 
+    Clog::Clogger& Clog::Clogger::operator<<(const Clog::Level& level) { 
         this->level = level;
         return *this;
     }
 
     Clog::Clogger& Clog::Clogger::operator<<(char* text) { 
-        this->buffer.push_back(text);
+        this->buffer += text;
         return *this;
     }
     Clog::Clogger& Clog::Clogger::operator<<(const char* text) {
-        this->buffer.push_back(text);
+        this->buffer += text;
         return *this;
     }
     Clog::Clogger& Clog::Clogger::operator<<(std::string text) {
-        this->buffer.push_back(text);
+        this->buffer += text;
         return *this;
     }
 // -------------------------------- END (Clogger Impl) -------------------------------- //
