@@ -50,8 +50,9 @@
                     this->usr.handl->print(this->buffer, this->format, this->usr, this->level);
                 } else {
                     this->handler->print(this->buffer, this->format, this->usr, this->level);
-                } 
+                }
             }
+            this->usr = Clog::usr::ROOT;
             this->level = Clog::lvl::INFO;
             this->buffer.clear();
         } else {

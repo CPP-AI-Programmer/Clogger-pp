@@ -4,15 +4,17 @@
 #  make the std library use case optional (create custom buffer class, move std::string and std::vector<T> operator<< functions to another file optionally added compiled using options)
 #  update the options to also control what .hpp/.h files are installed
 
+1.1.2:
+  this->usr now automatically reverts back to Clog::usr::ROOT
 1.1.1:
   Added back level based logging but this time to the main operator<< function
 1.1.0: 
-	Removed alot of bloat and updated the buffer to a simple std::string for speed and efficiency
+  Removed alot of bloat and updated the buffer to a simple std::string for speed and efficiency
 1.0.12:
-	Updated Clogger.hpp
+  Updated Clogger.hpp
 1.0.11:
-	Fixed Examples
+  Fixed Examples
 1.0.10:
-	Fixing Legacy Installed bug when trying to install new package layout
+  Fixing Legacy Installed bug when trying to install new package layout
 1.0.9:
-	new update for better '<<' use as well as splitting handlers into seperate .hpp files and allowing for optional compiling of the handlers for smaller file sizes
+  new update for better '<<' use as well as splitting handlers into seperate .hpp files and allowing for optional compiling of the handlers for smaller file sizes
